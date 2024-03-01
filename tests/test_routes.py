@@ -155,3 +155,13 @@ class TestAccountService(TestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         updated_account = resp.get_json()
         self.assertEqual(updated_account["name"], "Crush your Spirit")
+
+    def test_delete_an_account(self):
+        """It should delete an account"""
+        # Create account
+        account = self._create_accounts(1)[0]
+
+        # Delete account
+        resp = self.client.delete(f"{BASE_URL}/{account.id}")
+        self.assertEqual(resp.status_code, status.HTTP_204_NO_CONTENT)
+
