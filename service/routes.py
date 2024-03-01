@@ -67,15 +67,38 @@ def create_accounts():
 ######################################################################
 # READ AN ACCOUNT
 ######################################################################
+@app.route("/accounts/<int:id>", methods=["GET"])
+def read_account(id):
+    """
+    Read an Account
+    This endpoint will read an Account based on given id
+    """
+    app.logger.info("Request to read an Account")
+    found_account = Account.find(id)
+    if not found_account:
+        abort(status.HTTP_404_NOT_FOUND, f"Account with id [{id}] not found.")
 
-# ... place you code here to READ an account ...
+    return found_account.serialize(), status.HTTP_200_OK
 
 
 ######################################################################
 # UPDATE AN EXISTING ACCOUNT
 ######################################################################
 
-# ... place you code here to UPDATE an account ...
+@app.route("/accounts/<int:id>", methods=["PUT"])
+def update_account(id):
+    """
+    Update an Account
+    This endpoint will update an Account based on given id
+    """
+    app.logger.info("Request to update an Account")
+    found_account = Account.find(id)
+    if not found_account:
+        abort(status.HTTP_404_NOT_FOUND, f"Account with id [{id}] not found.")
+
+    found_account.deserialize(request.get_json())
+    account.update()
+    return found_account.serialize(), status.HTTP_200_OK
 
 
 ######################################################################
