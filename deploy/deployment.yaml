@@ -18,7 +18,7 @@ spec:
         app: accounts
     spec:
       containers:
-      - image: us.icr.io/sn-labs-lukaskern/accounts:1
+      - image: spirit_crusher_kern_image
         name: accounts
         resources: {}
 
