@@ -137,7 +137,7 @@ class TestAccountService(TestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         data = resp.get_json()
         self.assertEqual(data["name"], account.name)
-    
+
     def test_read_an_account_not_found(self):
         """It should not Read an account but is not found"""
         resp = self.client.get(f"{BASE_URL}/0")
@@ -165,7 +165,7 @@ class TestAccountService(TestCase):
         # Delete account
         resp = self.client.delete(f"{BASE_URL}/{account.id}")
         self.assertEqual(resp.status_code, status.HTTP_204_NO_CONTENT)
-    
+
     def test_list_all_accounts(self):
         """It should list all accounts"""
         # Create multiple accounts
@@ -176,4 +176,3 @@ class TestAccountService(TestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         data = resp.get_json()
         self.assertEqual(len(data), 5)
-
